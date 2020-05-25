@@ -2,7 +2,7 @@ import asyncHooks from 'async_hooks';
 
 const httpContext = new Map();
 
-const hooks = asyncHooks.createHook({
+asyncHooks.createHook({
   init (id, type, triggerId) {
     if (httpContext.has(triggerId)) {
         httpContext.set(id, httpContext.get(triggerId));
@@ -17,9 +17,7 @@ const hooks = asyncHooks.createHook({
     }
     httpContext.delete(id);
   },
-});
-
-hooks.enable();
+}).enable();
 
 export function set (key: any, value: any) {
   const asyncId = asyncHooks.executionAsyncId();
@@ -33,7 +31,7 @@ export function get (key: any) {
   const asyncId = asyncHooks.executionAsyncId();
   const store = httpContext.get(asyncId)
   if (store) {
-    store.get(key);
+    return store.get(key);
   }
 }
 
