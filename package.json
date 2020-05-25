@@ -1,14 +1,20 @@
 {
   "name": "http-context-nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Get and set request-scoped context anywhere, and use it in any framework.",
   "main": "lib/index.js",
-  "types": "lib",
+  "types": "lib/index.d.ts",
+  "files": ["lib/**/*"],
   "scripts": {
     "test": "mocha -r ts-node/register test/*.ts",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
