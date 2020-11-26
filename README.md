@@ -19,12 +19,12 @@ $ npm i http-context-nodejs
 import * as uuid from 'node-uuid';
 import * as httpContext from 'http-context-nodejs'
 ...
-// Use httpContext and set traceId to trace all the logs within a http request
-  app.use((req: Request, res: Response, next: NextFunction) => {
-    httpContext.scope();
-    httpContext.set('traceId', uuid.v1());
-    next();
-  })
+    app.use((req: Request, res: Response, next: NextFunction) => {
+        httpContext.scope();
+        httpContext.set('traceId', uuid.v1());
+        next();
+    });
+...
 ```
 
 #### Use it in anywhere
@@ -33,6 +33,7 @@ import * as httpContext from 'http-context-nodejs'
 import * as httpContext from 'http-context-nodejs'
 ...
     const traceId = httpContext.get('traceId');
+...
 ```
 
 ### How to use it in ExpressJS
@@ -44,12 +45,12 @@ import * as httpContext from 'http-context-nodejs'
 import * as uuid from 'node-uuid';
 import * as httpContext from 'http-context-nodejs';
 ...
-app.use((req, res, next) => {
-    httpContext.scope();
-    httpContext.set('traceId', uuid.v1());
-    next();
-});
-
+    app.use((req, res, next) => {
+        httpContext.scope();
+        httpContext.set('traceId', uuid.v1());
+        next();
+    });
+...
 ```
 ### Use it in anywhere
 
@@ -57,6 +58,7 @@ app.use((req, res, next) => {
 import * as httpContext from 'http-context-nodejs'
 ...
     const traceId = httpContext.get('traceId');
+...
 ```
 
 ## How it works
